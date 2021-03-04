@@ -8,7 +8,7 @@ export default class Cena {
         this.t0 = 0
         this.dt = 0
         this.idAnim = null;
-        thiss..assets = assets;
+        thiss.assets = assets;
     }
     desenhar(){
         this.ctx.fillStyle = "grey";

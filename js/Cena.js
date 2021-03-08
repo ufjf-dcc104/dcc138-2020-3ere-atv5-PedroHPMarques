@@ -1,12 +1,13 @@
 export default class Cena {
-    // É responsavel por desenhar elementos na tela
+    /* É responsavel por desenhar elementos na tela
+    */
     constructor(canvas, assets = null){
         this.canvas = canvas;
         this.ctx = canvas.getContext("2d");
         this.sprites = [];
         this.aRemover = [];
-        this.t0 = 0
-        this.dt = 0
+        this.t0 = 0;
+        this.dt = 0;
         this.idAnim = null;
         this.assets = assets;
         this.mapa = null;
@@ -22,7 +23,7 @@ export default class Cena {
             for (let s = 0; s < this.sprites.length; s++) {
                 const sprite = this.sprites[s];
                 sprite.desenhar(this.ctx);
-                this.aplicaRestricoes(dt);
+                this.aplicaRestricoes();
             }
         }
         this.ctx.fillStyle = "yellow";

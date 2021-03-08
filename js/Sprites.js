@@ -1,5 +1,6 @@
 export default class Sprite {
-  // responsavel por modelas algo que se move na tela.
+  /* responsavel por modelas algo que se move na tela.
+  */
   constructor({
     x = 100,
     y = 100,
@@ -28,9 +29,8 @@ export default class Sprite {
       this.mx * this.cena.mapa.SIZE,
       this.my * this.cena.mapa.SIZE,
       this.cena.mapa.SIZE,
-      this.cena.mapa.SIZE
-    );
-  }
+      this.cena.mapa.SIZE)
+  };
   passo(dt) {
     this.x = this.x + this.vx * dt;
     this.y = this.y + this.vy * dt;
@@ -69,7 +69,7 @@ export default class Sprite {
           x: pmx * SiZE + SiZE / 2,
           y: pmy * SiZE + SiZE / 2,
           w: SiZE,
-          h: SiZE,
+          h: SiZE
         };
         this.cena.ctx.strokeStyle = "white";
         this.cena.ctx.strokeRect(
@@ -94,7 +94,7 @@ export default class Sprite {
           x: pmx * SiZE + SiZE / 2,
           y: pmy * SiZE + SiZE / 2,
           w: SiZE,
-          h: SiZE,
+          h: SiZE
         };
         this.cena.ctx.strokeStyle = "white";
         this.cena.ctx.strokeRect(
@@ -120,7 +120,7 @@ export default class Sprite {
           x: pmx * SiZE + SiZE / 2,
           y: pmy * SiZE + SiZE / 2,
           w: SiZE,
-          h: SiZE,
+          h: SiZE
         };
         this.cena.ctx.strokeStyle = "white";
         this.cena.ctx.strokeRect(
@@ -145,7 +145,7 @@ export default class Sprite {
           x: pmx * SiZE + SiZE / 2,
           y: pmy * SiZE + SiZE / 2,
           w: SiZE,
-          h: SiZE,
+          h: SiZE
         };
         this.cena.ctx.strokeStyle = "white";
         this.cena.ctx.strokeRect(

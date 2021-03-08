@@ -50,6 +50,9 @@ export default class Sprite {
   aplicaRestricoes(dt){
     this.aplicaRestricoesDireita(dt);
     this.aplicaRestricoesEsquerda(dt);
+    this.aplicaRestricoesBaixo(dt);
+    this.aplicaRestricoesCima(dt);
+
 
   }
   aplicaRestricoesDireita(dt){
@@ -93,6 +96,53 @@ export default class Sprite {
        if(this.colidiuCom(tile)){
            this.vx = 0;
            this.x = tile.x + tile.w/2 + this.w/2 + 1;
+       }
+      }
+
+   }
+  }
+
+  aplicaRestricoesBaixo(dt){
+    if(this.vy>0){
+      const SIZE = this.cena.mapa.SIZE;
+
+      const pmx =  this.mx;
+      const pmy =  this.my +1;
+      if(this.cena.mapa.tiles[pmy][pmx] != 0){
+          const tile = {
+       x:pmx*SiZE + SiZE/2,
+       y:pmy*SiZE + SiZE/2,
+       w: SiZE,
+       h: SiZE
+       };
+       this.cena.ctx.strokeStyle = "white";
+       this.cena.ctx.strokeRect(tile.x-SiZE/2, tile.y-SiZE/2,SiZE,SiZE);
+       if(this.colidiuCom(tile)){
+           this.vy = 0;
+           this.y = tile.y - tile.h/2 - this.h/2 -1;
+       }
+      }
+
+   }
+  }
+  aplicaRestricoesCima(dt){
+    if(this.vy < 0){
+      const SIZE = this.cena.mapa.SIZE;
+
+      const pmx =  this.mx;
+      const pmy =  this.my - 1;
+      if(this.cena.mapa.tiles[pmy][pmx] != 0){
+          const tile = {
+       x:pmx*SiZE + SiZE/2,
+       y:pmy*SiZE + SiZE/2,
+       w: SiZE,
+       h: SiZE
+       };
+       this.cena.ctx.strokeStyle = "white";
+       this.cena.ctx.strokeRect(tile.x-SiZE/2, tile.y-SiZE/2,SiZE,SiZE);
+       if(this.colidiuCom(tile)){
+           this.vy = 0;
+           this.y = tile.y + tile.h/2 + this.h/2 + 1;
        }
       }
 

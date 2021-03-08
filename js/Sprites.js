@@ -37,7 +37,7 @@ export default class Sprite {
     this.y = this.y + this.vy * dt;
     this.mx = Math.floor(this.x / this.cena.mapa.SiZE);
     this.my = Math.floor(this.y / this.cena.mapa.SiZE);
-
+    
   }
   colidiuCom(outro) {
     return !(
@@ -46,5 +46,27 @@ export default class Sprite {
       this.y - this.h / 2 > outro.y + outro.h / 2 ||
       this.y + this.h / 2 < outro.y - outro.h / 2
     );
+  }
+  aplicaRestricoes(dt){
+      const SIZE = this.cena.mapa.SIZE;
+    if(this.vx>0){
+       const pmx =  this.mx + 1;
+       const pmy =  this.my;
+       if(this.cena.mapa.tiles[pmy][pmx] != 0){
+           const tile = {
+        x:pmx*SiZE + SiZE/2,
+        y:pmy*SiZE + SiZE/2,
+        w: SiZE,
+        h: SiZE
+        };
+        this.cena.ctx.strokeStyle = "white";
+        this.cena.ctx.strokeRect(tile.x-SiZE/2, tile.y-SiZE/2,SiZE,SiZE);
+        if(this.colidiuCom(tile)){
+            this.vx = 0;
+            this.x = tile.x - tile.w/2 - this.w/2 -1;
+        }
+       }
+
+    }
   }
 }

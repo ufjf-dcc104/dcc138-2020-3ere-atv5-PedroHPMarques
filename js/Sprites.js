@@ -25,19 +25,17 @@ export default class Sprite {
     ctx.fillRect(this.x - this.w / 2, this.y - this.h / 2, this.w, this.h);
     ctx.strokeStyle = "blue";
     ctx.strokeRect(
-        this.mx*this.cena.mapa.SIZE,
-        this.my*this.cena.mapa.SIZE,
-        this.cena.mapa.SIZE,
-        this.cena.mapa.SIZE
-
-        );
+      this.mx * this.cena.mapa.SIZE,
+      this.my * this.cena.mapa.SIZE,
+      this.cena.mapa.SIZE,
+      this.cena.mapa.SIZE
+    );
   }
   passo(dt) {
     this.x = this.x + this.vx * dt;
     this.y = this.y + this.vy * dt;
     this.mx = Math.floor(this.x / this.cena.mapa.SiZE);
     this.my = Math.floor(this.y / this.cena.mapa.SiZE);
-    
   }
   colidiuCom(outro) {
     return !(
@@ -47,105 +45,120 @@ export default class Sprite {
       this.y + this.h / 2 < outro.y - outro.h / 2
     );
   }
-  aplicaRestricoes(dt){
-    this.aplicaRestricoesDireita(dt);
-    this.aplicaRestricoesEsquerda(dt);
-    this.aplicaRestricoesBaixo(dt);
-    this.aplicaRestricoesCima(dt);
+  aplicaRestricoes(dt) {
+    this.aplicaRestricoesDireita(this.mx + 1, this.my - 1);
+    this.aplicaRestricoesDireita(this.mx + 1, this.my);
+    this.aplicaRestricoesDireita(this.mx + 1, this.my + 1);
+    this.aplicaRestricoesEsquerda(this.mx - 1, this.my - 1);
+    this.aplicaRestricoesEsquerda(this.mx - 1, this.my);
+    this.aplicaRestricoesEsquerda(this.mx - 1, this.my + 1);
 
-
+    this.aplicaRestricoesBaixo(this.mx - 1, this.my + 1);
+    this.aplicaRestricoesBaixo(this.mx, this.my + 1);
+    this.aplicaRestricoesBaixo(this.mx + 1, this.my + 1);
+    this.aplicaRestricoesCima(this.mx - 1, this.my - 1);
+    this.aplicaRestricoesCima(this.mx, this.my - 1);
+    this.aplicaRestricoesCima(this.mx + 1, this.my - 1);
   }
-  aplicaRestricoesDireita(dt){
-    if(this.vx>0){
+  aplicaRestricoesDireita(pmx, pmy) {
+    if (this.vx > 0) {
       const SIZE = this.cena.mapa.SIZE;
 
-      const pmx =  this.mx + 1;
-      const pmy =  this.my;
-      if(this.cena.mapa.tiles[pmy][pmx] != 0){
-          const tile = {
-       x:pmx*SiZE + SiZE/2,
-       y:pmy*SiZE + SiZE/2,
-       w: SiZE,
-       h: SiZE
-       };
-       this.cena.ctx.strokeStyle = "white";
-       this.cena.ctx.strokeRect(tile.x-SiZE/2, tile.y-SiZE/2,SiZE,SiZE);
-       if(this.colidiuCom(tile)){
-           this.vx = 0;
-           this.x = tile.x - tile.w/2 - this.w/2 -1;
-       }
+      if (this.cena.mapa.tiles[pmy][pmx] != 0) {
+        const tile = {
+          x: pmx * SiZE + SiZE / 2,
+          y: pmy * SiZE + SiZE / 2,
+          w: SiZE,
+          h: SiZE,
+        };
+        this.cena.ctx.strokeStyle = "white";
+        this.cena.ctx.strokeRect(
+          tile.x - SiZE / 2,
+          tile.y - SiZE / 2,
+          SiZE,
+          SiZE
+        );
+        if (this.colidiuCom(tile)) {
+          this.vx = 0;
+          this.x = tile.x - tile.w / 2 - this.w / 2 - 1;
+        }
       }
-
-   }
+    }
   }
-  aplicaRestricoesEsquerda(dt){
-    if(this.vx < 0){
+  aplicaRestricoesEsquerda(pmx, pmy) {
+    if (this.vx < 0) {
       const SIZE = this.cena.mapa.SIZE;
 
-      const pmx =  this.mx - 1;
-      const pmy =  this.my;
-      if(this.cena.mapa.tiles[pmy][pmx] != 0){
-          const tile = {
-       x:pmx*SiZE + SiZE/2,
-       y:pmy*SiZE + SiZE/2,
-       w: SiZE,
-       h: SiZE
-       };
-       this.cena.ctx.strokeStyle = "white";
-       this.cena.ctx.strokeRect(tile.x-SiZE/2, tile.y-SiZE/2,SiZE,SiZE);
-       if(this.colidiuCom(tile)){
-           this.vx = 0;
-           this.x = tile.x + tile.w/2 + this.w/2 + 1;
-       }
+      if (this.cena.mapa.tiles[pmy][pmx] != 0) {
+        const tile = {
+          x: pmx * SiZE + SiZE / 2,
+          y: pmy * SiZE + SiZE / 2,
+          w: SiZE,
+          h: SiZE,
+        };
+        this.cena.ctx.strokeStyle = "white";
+        this.cena.ctx.strokeRect(
+          tile.x - SiZE / 2,
+          tile.y - SiZE / 2,
+          SiZE,
+          SiZE
+        );
+        if (this.colidiuCom(tile)) {
+          this.vx = 0;
+          this.x = tile.x + tile.w / 2 + this.w / 2 + 1;
+        }
       }
-
-   }
+    }
   }
 
-  aplicaRestricoesBaixo(dt){
-    if(this.vy>0){
+  aplicaRestricoesBaixo(pmx, pmy) {
+    if (this.vy > 0) {
       const SIZE = this.cena.mapa.SIZE;
 
-      const pmx =  this.mx;
-      const pmy =  this.my +1;
-      if(this.cena.mapa.tiles[pmy][pmx] != 0){
-          const tile = {
-       x:pmx*SiZE + SiZE/2,
-       y:pmy*SiZE + SiZE/2,
-       w: SiZE,
-       h: SiZE
-       };
-       this.cena.ctx.strokeStyle = "white";
-       this.cena.ctx.strokeRect(tile.x-SiZE/2, tile.y-SiZE/2,SiZE,SiZE);
-       if(this.colidiuCom(tile)){
-           this.vy = 0;
-           this.y = tile.y - tile.h/2 - this.h/2 -1;
-       }
+      if (this.cena.mapa.tiles[pmy][pmx] != 0) {
+        const tile = {
+          x: pmx * SiZE + SiZE / 2,
+          y: pmy * SiZE + SiZE / 2,
+          w: SiZE,
+          h: SiZE,
+        };
+        this.cena.ctx.strokeStyle = "white";
+        this.cena.ctx.strokeRect(
+          tile.x - SiZE / 2,
+          tile.y - SiZE / 2,
+          SiZE,
+          SiZE
+        );
+        if (this.colidiuCom(tile)) {
+          this.vy = 0;
+          this.y = tile.y - tile.h / 2 - this.h / 2 - 1;
+        }
       }
-
-   }
+    }
   }
-  aplicaRestricoesCima(dt){
-    if(this.vy < 0){
+  aplicaRestricoesCima(pmx, pmy) {
+    if (this.vy < 0) {
       const SIZE = this.cena.mapa.SIZE;
 
-      const pmx =  this.mx;
-      const pmy =  this.my - 1;
-      if(this.cena.mapa.tiles[pmy][pmx] != 0){
-          const tile = {
-       x:pmx*SiZE + SiZE/2,
-       y:pmy*SiZE + SiZE/2,
-       w: SiZE,
-       h: SiZE
-       };
-       this.cena.ctx.strokeStyle = "white";
-       this.cena.ctx.strokeRect(tile.x-SiZE/2, tile.y-SiZE/2,SiZE,SiZE);
-       if(this.colidiuCom(tile)){
-           this.vy = 0;
-           this.y = tile.y + tile.h/2 + this.h/2 + 1;
-       }
+      if (this.cena.mapa.tiles[pmy][pmx] != 0) {
+        const tile = {
+          x: pmx * SiZE + SiZE / 2,
+          y: pmy * SiZE + SiZE / 2,
+          w: SiZE,
+          h: SiZE,
+        };
+        this.cena.ctx.strokeStyle = "white";
+        this.cena.ctx.strokeRect(
+          tile.x - SiZE / 2,
+          tile.y - SiZE / 2,
+          SiZE,
+          SiZE
+        );
+        if (this.colidiuCom(tile)) {
+          this.vy = 0;
+          this.y = tile.y + tile.h / 2 + this.h / 2 + 1;
+        }
       }
-
-   }
+    }
   }
 }

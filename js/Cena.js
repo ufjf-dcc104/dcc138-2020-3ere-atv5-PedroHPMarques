@@ -134,4 +134,9 @@ this.idAnim = requestAnimationFrame(
        }
        return color;
     }
+    adicionaSpritesIntervalo(interval){
+        setInterval(()=>{
+            this.adicionaSprites(1);
+        },interval);
+    }
 }

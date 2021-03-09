@@ -8,6 +8,10 @@ import modeloMapa1 from "../js/maps/mapa1.js";
 const mixer = new Mixer(10);
 const assets = new AssetManager(mixer);
 
+assets.carregaImagem("brick","assets/brick.png");
+assets.carregaImagem("floor","assets/floor.png");
+
+
 assets.carregaImagem("garota","assets/garota.png");
 assets.carregaImagem("esqueleto","assets/skelly.png");
 assets.carregaImagem("orc","assets/orc.png");

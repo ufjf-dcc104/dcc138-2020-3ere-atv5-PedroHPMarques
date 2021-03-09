@@ -18,22 +18,15 @@ export default class Mapa {
       for (let c = 0; c < this.COLUNAS; c++) {
         switch (this.tiles[l][c]) {
           case 1:
-            ctx.fillStyle = "grey";
-            ctx.lineWidth = 1;
-            ctx.strokeStyle = "black";
+            ctx.drawImage(this.cena.assets.img("brick"), c*this.SIZE, l*this.SIZE);
             break;
             case 2:
-            ctx.fillStyle = "red";
-            ctx.lineWidth = 2;
-            ctx.strokeStyle = "orange";
-            break;
+              ctx.drawImage(this.cena.assets.img("floor"), c*this.SIZE, l*this.SIZE);
+            
+        break;
           default:
-            ctx.fillStyle = "black";
-            ctx.lineWidth = 1;
-            ctx.strokeStyle = "grey";
-        }
-        ctx.fillRect(c * this.SIZE, l * this.SIZE, this.SIZE, this.SIZE);
-        ctx.strokeRect(c * this.SIZE, l * this.SIZE, this.SIZE, this.SIZE);
+            ctx.drawImage(this.cena.assets.img("floor"), c*this.SIZE, l*this.SIZE);
+          }
       }
     }
   }

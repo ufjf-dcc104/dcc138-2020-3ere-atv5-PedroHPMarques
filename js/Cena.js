@@ -1,3 +1,4 @@
+import Sprites from "./Sprites.js";
 export default class Cena {
     /* É responsavel por desenhar elementos na tela
     */
@@ -96,5 +97,40 @@ this.idAnim = requestAnimationFrame(
     configuraMapa(mapa){
         this.mapa = mapa;
         this.mapa.cena = this;
+    }
+    criaSpritesAleatorio(num = 1){
+        let sprites = [];
+        for(let i=0; i<num; i++){
+            let sprite = new Sprites({
+                x: this.getRandomInt(40,400),
+                y: this.getRandomInt(50,275),
+                vx: this.getRandomInt(-10,10),
+                vy: this.getRandomInt(-10,10),
+                color: this.getRandomColor()
+            });
+            sprites.push(sprite);
+        }
+        return sprites;
+    }
+    adicionaSprites(num){
+        let sprites = this.criaSpritesAleatorio(num);
+        for(let i=0; i<sprites.length; i++){
+            this.adicionar(sprites[i]);
+        }
+    }
+
+    getRandomInt(min,max){
+       min = Math.ceil(min);
+       max = Math.floor(max);
+       return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    getRandomColor(){
+       let letters = "0123456789ABCDEF";
+       let color = "#";
+       for (let i = 0; i < 6; i++) {
+         color += letters[Math.floor(Math.random() * 16)];
+       }
+       return color;
     }
 }

@@ -32,6 +32,7 @@ cena1.adicionar(pc);
 cena1.adicionar(en1);
 cena1.adicionar(new Sprites({x: 115,y:70,vy:10,color:"red"}));
 cena1.adicionar(new Sprites({x: 115,y:160,vy:-10,color:"red"}));
+cena1.adicionaSprites(7);
 
 
 cena1.iniciar();

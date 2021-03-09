@@ -14,7 +14,7 @@ export default class Mapa {
   }
   desenhar(ctx) {
     for (let l = 0; l < this.LINHAS; l++) {
-      this.tiles[l] = [];
+     
       for (let c = 0; c < this.COLUNAS; c++) {
         switch (this.tiles[l][c]) {
           case 1:

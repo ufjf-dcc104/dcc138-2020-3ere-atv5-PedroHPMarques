@@ -1,5 +1,5 @@
 import Cena from "./Cena.js";
-import Sprite from "./Sprites.js";
+import Sprites from "./Sprites.js";
 import AssetManager from "./AssetManager.js";
 import Mixer from "./Mixer.js";
 import Mapa from "./Mapa.js";
@@ -25,13 +25,13 @@ const mapa1 = new Mapa(10 ,14 , 32);
 mapa1.carregaMapa(modeloMapa1);
 cena1.configuraMapa(mapa1);
 
-const pc = new Sprite({x: 50,y:150,vx:10});
-const en1 = new Sprite({x:160,vx: -10,color:"red"});
+const pc = new Sprites({x: 50,y:150,vx:10});
+const en1 = new Sprites({x:160,vx: -10,color:"red"});
 
 cena1.adicionar(pc);
 cena1.adicionar(en1);
-cena1.adicionar(new Sprite({x: 115,y:70,vy:10,color:"red"}));
-cena1.adicionar(new Sprite({x: 115,y:160,vy:-10,color:"red"}));
+cena1.adicionar(new Sprites({x: 115,y:70,vy:10,color:"red"}));
+cena1.adicionar(new Sprites({x: 115,y:160,vy:-10,color:"red"}));
 
 
 cena1.iniciar();

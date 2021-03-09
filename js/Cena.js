@@ -78,6 +78,7 @@ this.idAnim = requestAnimationFrame(
         }
     }
     quandoColidir(a,b){
+        this.assets.play("boom");
         if(! this.aRemover.includes(a)){
             this.aRemover.push(a);
             }

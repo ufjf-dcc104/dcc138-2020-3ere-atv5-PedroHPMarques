@@ -62,12 +62,19 @@ pc.controlar = function(dt){
       }
   }
 
-const en1 = new Sprites({x:160,vx: -10,color:"red"});
+const en1 = new Sprites({ x: 360, color: "red", controlar: perseguePC});
+en1.controlar = perseguePC;
 
 cena1.adicionar(pc);
+
+function perseguePC(dt){
+    this.vx = 25*Math.sign(pc.x - this.x);
+    this.vy = 25*Math.sign(pc.y - this.y);
+}
+
 cena1.adicionar(en1);
-cena1.adicionar(new Sprites({x: 115,y:70,vy:10,color:"red"}));
-cena1.adicionar(new Sprites({x: 115,y:160,vy:-10,color:"red"}));
+cena1.adicionar(new Sprites({x: 115,y:70,vy:10,color:"red",controlar: perseguePC}));
+cena1.adicionar(new Sprites({x: 115,y:160,vy:-10,color:"red",controlar: perseguePC}));
 cena1.adicionaSprites(7);
 cena1.adicionaSpritesIntervalo(4000);
 

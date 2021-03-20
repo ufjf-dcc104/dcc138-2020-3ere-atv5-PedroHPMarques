@@ -9,6 +9,7 @@ export default class Sprites {
     color = "white",
     vx = 0,
     vy = 0,
+    controlar = ()=>{}
   } = {}) {
     this.x = x;
     this.y = y;
@@ -20,6 +21,7 @@ export default class Sprites {
     this.cena = null;
     this.mx = 0;
     this.my = 0;
+    this.controlar = controlar;
   }
   desenhar(ctx) {
     ctx.fillStyle = this.color;

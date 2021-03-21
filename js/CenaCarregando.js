@@ -11,14 +11,14 @@ export default class CenaCarregando extends Cena {
         this.ctx.fillText(
           this.assets?.progresso(),
           this.canvas.width / 2,
-          this.canvas.height / 2.3
+          this.canvas.height / 2.8
         );
 
         if (this.assets.acabou()) {
           this.ctx.fillText(
             "Aperte espaço para continuar",
-            this.canvas.width / 2,
-            this.canvas.height / 4,
+            this.canvas.width / 4,
+            this.canvas.height / 3.8,
           );
         }
     }

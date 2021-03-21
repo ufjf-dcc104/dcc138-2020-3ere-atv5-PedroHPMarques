@@ -5,14 +5,24 @@ import Sprites from "./Sprites.js";
 
 export default class CenaJogo extends Cena {
     quandoColidir(a, b) {
-      this.assets.play("boom");
-        if (!this.aRemover.includes(a)) {
+      if(a.tags.has("pc") && b.tags.has("moeda") || b.tags.has("pc") && a.tags.has("moeda")){
+        if (!this.aRemover.includes(a) && a.tags.has("moeda")){
           this.aRemover.push(a);
         }
-        if (!this.aRemover.includes(b)) {
+        if (!this.aRemover.includes(b) && b.tags.has("moeda")){
           this.aRemover.push(b);
+          this.assets.play("moeda");
+          return;
         }
-        if(a.tags.has("pc") && b.tags.has("enemy")){
+      }
+      if (!this.aRemover.includes(a)){
+        this.aRemover.push(a);
+      }
+      if (!this.aRemover.includes(b)){
+        this.aRemover.push(b);
+      }
+      if (a.tags.has("pc") && b.tags.has("enemy") || b.tags.has("pc") && a.tags.has("enemy")){
+        this.assets.play("boom");
             this.game.selecionaCena("fim");
         }
       }
@@ -50,11 +60,15 @@ export default class CenaJogo extends Cena {
 
         const en1 = new Sprites({ x: 360, color: "red", controlar: perseguePC, tags:["enemy"]});
         en1.controlar = perseguePC;
+      
         this.adicionar(en1);
         this.adicionar(new Sprites({ x: 115, y: 70, vy: 10, color: "red", controlar: perseguePC, tags:["enemy"]}));
         this.adicionar(new Sprites({ x: 115, y: 160, vy: -10, color: "red", controlar: perseguePC, tags:["enemy"] }));
         // this.adicionaSprites(10);
         // this.adicionaSpritesIntervalo(4000);
-
+      this.adicionar(new Sprites({x: 50, y: 120, color: "gold", tags: ["moeda"]}));
+      this.adicionar(new Sprites({x: 340, y: 50, color: "gold", tags: ["moeda"]}));
+      this.adicionar(new Sprites({x: 150, y: 250, color: "gold", tags: ["moeda"]}));
+      this.adicionar(new Sprites({x: 380, y: 250, color: "gold", tags: ["moeda"]}));
       }
 }

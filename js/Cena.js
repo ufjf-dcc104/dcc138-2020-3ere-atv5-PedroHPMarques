@@ -24,8 +24,8 @@ export default class Cena {
                 sprite.aplicaRestricoes();
             }
         }
-        this.ctx.fillStyle = "yellow";
-        this.ctx.fillText(this.assets?.progresso(), 10,20);
+        // this.ctx.fillStyle = "yellow";
+        // this.ctx.fillText(this.assets?.progresso(), 10,20);
     }
     adicionar(sprite){
         sprite.cena = this;

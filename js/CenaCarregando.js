@@ -3,22 +3,22 @@ import Cena from "./Cena.js";
 export default class CenaCarregando extends Cena {
     desenhar() {
 
-        this.ctx.fillStyle = "black";
+        this.ctx.fillStyle = "blue";
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.font = "20px Impact";
-        this.ctx.fillStyle = "yellow";
+        this.ctx.fillStyle = "orange";
         this.ctx.TextAlign = "center";
         this.ctx.fillText(
           this.assets?.progresso(),
-          this.canvas.width / 2,
-          this.canvas.height / 2.8
+          this.canvas.width / 2.5,
+          this.canvas.height / 2.4
         );
 
         if (this.assets.acabou()) {
           this.ctx.fillText(
             "Aperte espaço para continuar",
-            this.canvas.width / 4,
-            this.canvas.height / 3.8,
+            this.canvas.width / 4.8,
+            this.canvas.height / 2.8,
           );
         }
     }

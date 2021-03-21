@@ -1,13 +1,10 @@
-import Cena from "./Cena.js";
-import Sprites from "./Sprites.js";
 import AssetManager from "./AssetManager.js";
 import Mixer from "./Mixer.js";
-import Mapa from "./Mapa.js";
-import modeloMapa1 from "../js/maps/mapa1.js";
 import InputManager from "./InputManager.js";
 import Game from "./Game.js";
 import CenaJogo from "./CenaJogo.js";
 import CenaCarregando from "./CenaCarregando.js";
+import CenaFim from "./CenaFim.js";
 
 const input = new InputManager();
 const mixer = new Mixer(10);
@@ -42,51 +39,12 @@ input.configurarTeclado({
 
 const game = new Game(canvas, assets, input);
 
-const ctx = canvas.getContext("2d");
-const cena0 = new CenaCarregando(canvas, assets);
-const cena1 = new CenaJogo(canvas, assets);
+const cena0 = new CenaCarregando();
+const cena1 = new CenaJogo();
+const cena2 = new CenaFim();
 game.adicionarCena("carregando", cena0);
 
 game.adicionarCena("jogo", cena1);
-
-const mapa1 = new Mapa(10 ,14 , 32);
-mapa1.carregaMapa(modeloMapa1);
-cena1.configuraMapa(mapa1);
-
-const pc = new Sprites({ x: 50, y:150});
-pc.controlar = function(dt){
-    if(input.comandos.get("MOVE_ESQUERDA")){
-      this.vx = -50;
-    } else if(input.comandos.get("MOVE_DIREITA")){
-      this.vx = +50;
-    } else{
-      this.vx = 0;
-    }
-    if(input.comandos.get("MOVE_CIMA")){
-        this.vy = -50;
-      } else if(input.comandos.get("MOVE_BAIXO")){
-        this.vy = +50;
-      } else{
-        this.vy = 0;
-      }
-  }
-
-const en1 = new Sprites({ x: 360, color: "red", controlar: perseguePC});
-en1.controlar = perseguePC;
-
-cena1.adicionar(pc);
-
-function perseguePC(dt){
-    this.vx = 25*Math.sign(pc.x - this.x);
-    this.vy = 25*Math.sign(pc.y - this.y);
-}
-
-cena1.adicionar(en1);
-cena1.adicionar(new Sprites({x: 115,y:70,vy:10,color:"red",controlar: perseguePC}));
-cena1.adicionar(new Sprites({x: 115,y:160,vy:-10,color:"red",controlar: perseguePC}));
-cena1.adicionaSprites(7);
-cena1.adicionaSpritesIntervalo(4000);
-
 
 game.iniciar();
 

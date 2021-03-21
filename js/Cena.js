@@ -9,6 +9,7 @@ export default class Cena {
         this.sprites = [];
         this.game = null;
         this.pontos = 0;
+        this.mapaAtual = null;
         this.preparar();
     }
     desenhar(){
@@ -133,7 +134,7 @@ this.idAnim = requestAnimationFrame(
             this.adicionaSprites(1);
         },interval);
     }
-    preparar(){
+    preparar(mapa){
         this.sprites = [];
     this.aRemover = [];
     this.t0 = null;
@@ -141,5 +142,6 @@ this.idAnim = requestAnimationFrame(
     this.idAnim = null;
     this.mapa = null;
     this.rodando = true;
+    this.mapaAtual = mapa;
 }
 }

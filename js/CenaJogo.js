@@ -2,9 +2,15 @@ import Mapa from "./Mapa.js";
 import modeloMapa1 from "../js/maps/mapa1.js";
 import Cena from "./Cena.js";
 import Sprites from "./Sprites.js";
+import modeloMapa2 from "../js/maps/mapa2.js"
 
 export default class CenaJogo extends Cena {
     quandoColidir(a, b) {
+      if(a.tags.has("pc") && b.tags.has("bau") || b.tags.has("pc") && a.tags.has("bau"))
+    {
+      this.preparar(modeloMapa2);
+      return;
+    }
       if(a.tags.has("pc") && b.tags.has("moeda") || b.tags.has("pc") && a.tags.has("moeda")){
         if (!this.aRemover.includes(a) && a.tags.has("moeda")){
           this.aRemover.push(a);
@@ -27,27 +33,28 @@ export default class CenaJogo extends Cena {
             this.game.selecionaCena("fim");
         }
       }
-      preparar(){
-        super.preparar();
-        const mapa1 = new Mapa(11, 15, 32);
-        mapa1.carregaMapa(modeloMapa1)
-        this.configuraMapa(mapa1);
+      preparar(modeloMapa = modeloMapa1){
+        super.preparar(modeloMapa);
+        this.mapaAtual = modeloMapa;
+        const mapa = new Mapa(11, 15, 32);
+        mapa.carregaMapa(modeloMapa)
+        this.configuraMapa(mapa);
 
         const pc = new Sprites({ x: 50, y:150});
         pc.tags.add("pc");
         const cena = this;
         pc.controlar = function(dt){
           if(cena.input.comandos.get("MOVE_ESQUERDA")){
-            this.vx = -50;
+            this.vx = -55;
           } else if(cena.input.comandos.get("MOVE_DIREITA")){
-            this.vx = +50;
+            this.vx = +55;
           } else{
             this.vx = 0;
           }
           if(cena.input.comandos.get("MOVE_CIMA")){
-            this.vy = -50;
+            this.vy = -55;
           } else if(cena.input.comandos.get("MOVE_BAIXO")){
-            this.vy = +50;
+            this.vy = +55;
           } else{
             this.vy = 0;
           }
@@ -71,5 +78,6 @@ export default class CenaJogo extends Cena {
       this.adicionar(new Sprites({x: 340, y: 50, color: "gold", tags: ["moeda"]}));
       this.adicionar(new Sprites({x: 150, y: 250, color: "gold", tags: ["moeda"]}));
       this.adicionar(new Sprites({x: 380, y: 250, color: "gold", tags: ["moeda"]}));
+      this.adicionar(new Sprites({x: 380, y: 210, color: "orange", tags: ["bau"]}));
       }
 }

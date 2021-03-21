@@ -6,6 +6,7 @@ export default class Cena {
         this.canvas = canvas;
         this.ctx = canvas?.getContext("2d");
         this.assets = assets;
+        this.sprites = [];
         this.game = null;
         this.preparar();
     }
@@ -48,7 +49,7 @@ export default class Cena {
         this.removerSprites();
         if(this.rodando){
             this.iniciar();
-          };
+          }
         
         this.t0 = t;
     }
@@ -90,15 +91,6 @@ this.idAnim = requestAnimationFrame(
         this.mapa = mapa;
         this.mapa.cena = this;
     }
-    preparar(){
-        this.sprites = [];
-        this.aRemover = [];
-        this.t0 = null;
-        this.dt = 0;
-        this.idAnim = null;
-        this.mapa = null;
-        this.rodando = true;
-      }
     criaSpritesAleatorio(num = 1){
         let sprites = [];
         for(let i=0; i<num; i++){
@@ -119,24 +111,33 @@ this.idAnim = requestAnimationFrame(
             this.adicionar(sprites[i]);
         }
     }
-
+    
     getRandomInt(min,max){
-       min = Math.ceil(min);
-       max = Math.floor(max);
-       return Math.floor(Math.random() * (max - min + 1)) + min;
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min + 1)) + min;
     }
-
+    
     getRandomColor(){
-       let letters = "0123456789ABCDEF";
+        let letters = "0123456789ABCDEF";
        let color = "#";
        for (let i = 0; i < 6; i++) {
-         color += letters[Math.floor(Math.random() * 16)];
-       }
-       return color;
+           color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
     }
     adicionaSpritesIntervalo(interval){
         setInterval(()=>{
             this.adicionaSprites(1);
         },interval);
     }
+    preparar(){
+        this.sprites = [];
+    this.aRemover = [];
+    this.t0 = null;
+    this.dt = 0;
+    this.idAnim = null;
+    this.mapa = null;
+    this.rodando = true;
+}
 }

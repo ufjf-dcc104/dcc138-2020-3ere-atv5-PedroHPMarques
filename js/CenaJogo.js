@@ -5,6 +5,7 @@ import Sprites from "./Sprites.js";
 
 export default class CenaJogo extends Cena {
     quandoColidir(a, b) {
+      this.assets.play("boom");
         if (!this.aRemover.includes(a)) {
           this.aRemover.push(a);
         }
@@ -14,7 +15,6 @@ export default class CenaJogo extends Cena {
         if(a.tags.has("pc") && b.tags.has("enemy")){
             this.game.selecionaCena("fim");
         }
-        this.assets.play("boom");  
       }
       preparar(){
         super.preparar();
@@ -40,7 +40,7 @@ export default class CenaJogo extends Cena {
           } else{
             this.vy = 0;
           }
-        };
+        }
         this.adicionar(pc);
 
         function perseguePC(dt){
@@ -53,8 +53,8 @@ export default class CenaJogo extends Cena {
         this.adicionar(en1);
         this.adicionar(new Sprites({ x: 115, y: 70, vy: 10, color: "red", controlar: perseguePC, tags:["enemy"]}));
         this.adicionar(new Sprites({ x: 115, y: 160, vy: -10, color: "red", controlar: perseguePC, tags:["enemy"] }));
-        this.adicionaSprites(10);
-        this.adicionaSpritesIntervalo(4000);
+        // this.adicionaSprites(10);
+        // this.adicionaSpritesIntervalo(4000);
 
       }
 }

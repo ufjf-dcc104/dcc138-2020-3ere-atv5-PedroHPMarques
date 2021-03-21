@@ -8,6 +8,7 @@ export default class Cena {
         this.assets = assets;
         this.sprites = [];
         this.game = null;
+        this.pontos = 0;
         this.preparar();
     }
     desenhar(){
@@ -24,7 +25,8 @@ export default class Cena {
                 sprite.aplicaRestricoes();
             }
         }
-        // this.ctx.fillStyle = "yellow";
+        this.ctx.fillStyle = "darkgreen";
+        this.ctx.fillText("Pontuação:" + this.pontos*1,100,20);
         // this.ctx.fillText(this.assets?.progresso(), 10,20);
     }
     adicionar(sprite){

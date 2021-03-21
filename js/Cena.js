@@ -25,7 +25,7 @@ export default class Cena {
                 sprite.aplicaRestricoes();
             }
         }
-        this.ctx.fillStyle = "darkgreen";
+        this.ctx.fillStyle = "white";
         this.ctx.fillText("Pontuação:" + this.pontos*1,100,20);
         // this.ctx.fillText(this.assets?.progresso(), 10,20);
     }
